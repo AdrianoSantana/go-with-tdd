@@ -4,10 +4,12 @@ import "fmt"
 
 const espanhol = "espanhol"
 const frances = "frances"
+const holandes = "holandes"
 
 const prefixoOlaPortugues = "Olá, "
 const prefixoOlaEspanhol = "Hola, "
 const prefixoOlaFrances = "Bonjour, "
+const prefixoOlaHolandes = "Hallo, "
 
 func ola(nome string, idioma string) string {
 	if nome == "" {
@@ -21,6 +23,8 @@ func ola(nome string, idioma string) string {
 		prefixo = prefixoOlaFrances
 	case espanhol:
 		prefixo = prefixoOlaEspanhol
+	case holandes:
+		prefixo = prefixoOlaHolandes
 	}
 
 	return prefixo + nome
