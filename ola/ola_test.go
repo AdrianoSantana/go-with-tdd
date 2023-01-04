@@ -10,15 +10,21 @@ func TestOla(t *testing.T) {
 		}
 	}
 	t.Run("Diz olá para as pessoas", func(t *testing.T) {
-		resultado := ola("Adriano")
+		resultado := ola("Adriano", "")
 		esperado := "Olá, Adriano"
 
 		verificaMensagemCorreta(t, esperado, resultado)
 	})
 
 	t.Run("Diz 'olá, Mundo' se uma string vazia é passada", func(t *testing.T) {
-		resultado := ola("")
+		resultado := ola("", "")
 		esperado := "Olá, Mundo"
+		verificaMensagemCorreta(t, esperado, resultado)
+	})
+
+	t.Run("Em espanhol", func(t *testing.T) {
+		resultado := ola("Elodie", "espanhol")
+		esperado := "Hola, Elodie"
 		verificaMensagemCorreta(t, esperado, resultado)
 	})
 }
