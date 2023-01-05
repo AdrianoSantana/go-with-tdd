@@ -1,6 +1,8 @@
 package adicionador
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestAdicionadotr(t *testing.T) {
 	soma := Adiciona(2, 2)
