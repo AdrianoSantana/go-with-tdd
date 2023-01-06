@@ -8,7 +8,7 @@ func TestSoma(t *testing.T) {
 		resultado := Soma(numeros)
 		esperado := 10
 		if resultado != esperado {
-			t.Errorf("Esperado '%d' Resultado '%d'", esperado, resultado)
+			t.Errorf("Esperado '%v' Resultado '%v'", esperado, resultado)
 		}
 	})
 }
