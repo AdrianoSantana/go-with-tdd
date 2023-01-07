@@ -15,3 +15,16 @@ func SomaTudo(numerosX ...[]int) []int {
 	}
 	return somas
 }
+
+func SomaTodoResto(numerosX ...[]int) []int {
+	var somas []int
+	for _, numeros := range numerosX {
+		if len(numeros) == 0 {
+			somas = append(somas, 0)
+		} else {
+			resto := numeros[1:]
+			somas = append(somas, Soma(resto))
+		}
+	}
+	return somas
+}
