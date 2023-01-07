@@ -14,3 +14,11 @@ func TestPerimetro(t *testing.T) {
 	esperado := 40.0
 	verificaTeste(t, resultado, esperado)
 }
+
+func TestArea(t *testing.T) {
+	resultado := Area(12.0, 6.0)
+	esperado := 72.0
+	if resultado != esperado {
+		t.Errorf("Resultado: '%.2f' Esperado: '%.2f'", resultado, esperado)
+	}
+}
