@@ -31,7 +31,7 @@ func TestArea(t *testing.T) {
 	for _, ta := range testesArea {
 		resultado := ta.Forma.Area()
 		if resultado != ta.Esperado {
-			t.Errorf("Resultado: '%.2f' Esperado: '%.2f'", resultado, ta.Esperado)
+			t.Errorf("%#v Resultado: '%.2f' Esperado: '%.2f'", ta.Forma, resultado, ta.Esperado)
 		}
 	}
 }

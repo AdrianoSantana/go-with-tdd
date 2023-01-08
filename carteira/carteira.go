@@ -1,6 +1,11 @@
 package carteira
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
+
+var erroSaldoInsuficiente = errors.New("Não foi possivel concluir a transação: Saldo insuficiente")
 
 type Bitcon float64
 
@@ -9,7 +14,7 @@ func (b Bitcon) String() string {
 }
 
 type Carteira struct {
-	bitcon Bitcon
+	saldo Bitcon
 }
 
 type Stringer interface {
@@ -17,9 +22,17 @@ type Stringer interface {
 }
 
 func (c *Carteira) Saldo() Bitcon {
-	return c.bitcon
+	return c.saldo
 }
 
 func (c *Carteira) Depositar(valor Bitcon) {
-	c.bitcon += valor
+	c.saldo += valor
+}
+
+func (c *Carteira) Retirar(valor Bitcon) error {
+	if valor > c.saldo {
+		return erroSaldoInsuficiente
+	}
+	c.saldo -= valor
+	return nil
 }
