@@ -9,8 +9,9 @@ func (e ErrDicionario) Error() string {
 }
 
 const (
-	ErrNaoEncontrado    = ErrDicionario("Não foi possivel encontrar uma definição para essa palavra")
-	ErrPalavraExistente = ErrDicionario("Já existe uma definição cadastrada para essa palavra")
+	ErrNaoEncontrado      = ErrDicionario("Não foi possivel encontrar uma definição para essa palavra")
+	ErrPalavraExistente   = ErrDicionario("Já existe uma definição cadastrada para essa palavra")
+	ErrPalavraInexistente = ErrDicionario("Não existe a palavra nesse dicionario")
 )
 
 func (d Dictionary) Busca(palavra string) (string, error) {
@@ -28,6 +29,19 @@ func (d Dictionary) Adiciona(palavra string, definicao string) error {
 		d[palavra] = definicao
 	case nil:
 		return ErrPalavraExistente
+	default:
+		return err
+	}
+	return nil
+}
+
+func (d Dictionary) Atualiza(palavra, novaDefinicao string) error {
+	_, err := d.Busca(palavra)
+	switch err {
+	case ErrNaoEncontrado:
+		return ErrPalavraInexistente
+	case nil:
+		d[palavra] = novaDefinicao
 	default:
 		return err
 	}
