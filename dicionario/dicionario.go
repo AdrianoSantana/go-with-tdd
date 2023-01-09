@@ -47,3 +47,7 @@ func (d Dictionary) Atualiza(palavra, novaDefinicao string) error {
 	}
 	return nil
 }
+
+func (d Dictionary) Deletar(palavra string) {
+	delete(d, palavra)
+}

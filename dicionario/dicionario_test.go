@@ -58,6 +58,19 @@ func TestAtualizacao(t *testing.T) {
 	})
 }
 
+func TestDeletar(t *testing.T) {
+	palavra := "any_palavra"
+	definicao := "any_definicao"
+
+	dicionario := Dictionary{palavra: definicao}
+	dicionario.Deletar(palavra)
+
+	_, err := dicionario.Busca(palavra)
+	if err != ErrNaoEncontrado {
+		t.Errorf("Espera-se que '%s' seja deletado", palavra)
+	}
+}
+
 func comparaString(t *testing.T, resultado string, esperado string) {
 	t.Helper()
 	if resultado != esperado {
