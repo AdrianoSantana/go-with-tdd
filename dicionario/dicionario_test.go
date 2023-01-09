@@ -16,15 +16,24 @@ func TestBusca(t *testing.T) {
 		if err == nil {
 			t.Fatal("Era esperado um erro!")
 		}
-		comparaErro(t, err, errNaoEncontrado)
+		comparaErro(t, err, ErrNaoEncontrado)
 	})
 }
 
 func TestAdiciona(t *testing.T) {
-	dicionario := Dictionary{}
-	dicionario.Adiciona("teste", "Isso é apenas um teste")
+	t.Run("Insere uma palavra inexistente", func(t *testing.T) {
+		dicionario := Dictionary{}
+		err := dicionario.Adiciona("teste", "Isso é apenas um teste")
+		comparaErro(t, err, nil)
+		comparaDefinicao(t, dicionario, "teste", "Isso é apenas um teste")
+	})
 
-	comparaDefinicao(t, dicionario, "teste", "Isso é apenas um teste")
+	t.Run("Insere uma palavra existente", func(t *testing.T) {
+		dicionario := Dictionary{"teste": "Definição antiga"}
+		err := dicionario.Adiciona("teste", "Nova definição")
+		comparaErro(t, err, ErrPalavraExistente)
+		comparaDefinicao(t, dicionario, "teste", "Definição antiga")
+	})
 }
 
 func comparaString(t *testing.T, resultado string, esperado string) {
