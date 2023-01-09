@@ -1,5 +1,7 @@
 package dicionario
 
-func Busca(dicionario map[string]string, palavra string) string {
+type Dictionary map[string]string
+
+func (d Dictionary) Busca(dicionario map[string]string, palavra string) string {
 	return dicionario[palavra]
 }
