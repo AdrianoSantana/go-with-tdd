@@ -1,6 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"net/http"
+	"os"
+
+	"github.com/AdrianoSantana/go-with-tdd/contagem"
+	"github.com/AdrianoSantana/go-with-tdd/cumprimenta"
+)
 
 const espanhol = "espanhol"
 const frances = "frances"
@@ -31,6 +37,11 @@ func ola(nome string, idioma string) string {
 	}
 	return prefixoDeSaudacao(idioma) + nome
 }
+
+func handleCumprimenta(w http.ResponseWriter, r *http.Request) {
+	cumprimenta.Cumprimenta(w, "Santana")
+}
+
 func main() {
-	fmt.Println(ola("Adriano", ""))
+	contagem.Contagem(os.Stdout, &contagem.SleeperPadrao{})
 }
