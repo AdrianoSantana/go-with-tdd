@@ -5,6 +5,16 @@ import (
 	"testing"
 )
 
+type Pessoa struct {
+	Nome   string
+	Perfil Perfil
+}
+
+type Perfil struct {
+	Idade  int
+	Cidade string
+}
+
 func TestPercorrer(t *testing.T) {
 	t.Run("Deve chamar uma função se o tipo da propriedade da struct for string", func(t *testing.T) {
 		casos := []struct {
@@ -28,6 +38,46 @@ func TestPercorrer(t *testing.T) {
 					Idade int
 				}{"Ana", 26},
 				[]string{"Ana"},
+			},
+			{
+				"Struct aninhada",
+				Pessoa{
+					"Ana",
+					Perfil{26, "Recife"},
+				},
+				[]string{"Ana", "Recife"},
+			},
+			{
+				"Ponteiros para coisas",
+				&Pessoa{
+					"Ana",
+					Perfil{26, "Recife"},
+				},
+				[]string{"Ana", "Recife"},
+			},
+			{
+				"Slices",
+				[]Perfil{
+					{33, "Interior"},
+					{26, "Recife"},
+				},
+				[]string{"Interior", "Recife"},
+			},
+			{
+				"Arrays",
+				[2]Perfil{
+					{33, "Londres"},
+					{34, "Reykjavík"},
+				},
+				[]string{"Londres", "Reykjavík"},
+			},
+			{
+				"Maps",
+				map[string]string{
+					"Ana": "Ana",
+					"Bia": "aiB",
+				},
+				[]string{"Ana", "aiB"},
 			},
 		}
 
