@@ -13,6 +13,22 @@ func TestPercorrer(t *testing.T) {
 			ChamadasEsperadas []string
 		}{
 			{"Struct com um campo string", struct{ Nome string }{"Ana"}, []string{"Ana"}},
+			{
+				"Struct com mais de um campo string",
+				struct {
+					Nome      string
+					Sobrenome string
+				}{"Ana", "Santana"},
+				[]string{"Ana", "Santana"},
+			},
+			{
+				"Struct sem campo do tipo string",
+				struct {
+					Nome  string
+					Idade int
+				}{"Ana", 26},
+				[]string{"Ana"},
+			},
 		}
 
 		for _, caso := range casos {
@@ -20,7 +36,7 @@ func TestPercorrer(t *testing.T) {
 			percorre(caso.Entrada, func(entrada string) {
 				resultado = append(resultado, entrada)
 			})
-			if len(resultado) != 1 {
+			if len(resultado) != len(caso.ChamadasEsperadas) {
 				t.Errorf("Número incorreto de chamadas de função: resultado %d, esperado %d", len(resultado), 1)
 			}
 
